@@ -45,6 +45,15 @@ public class ClienteDAOImpl extends GenericDAOImpl<Cliente,Integer> implements C
 				.getResultList();
 	}
 
+	@Override
+	public List<Cliente> buscarPorEstados(List<String> estados) {
+		
+		return em.createQuery("from Cliente c where c.endereco.cidade.uf in :e", Cliente.class)
+				.setParameter("e", estados)
+				.setMaxResults(50)
+				.getResultList();
+	}
+
 }
 
 
